@@ -20,12 +20,11 @@ def transform_inline_css(full_html_content, **kwargs):
     # Assume we care about these, set sane defaults
     # Pop because we don't want to pass in 2 keyword
     # arguements with the same names.
-    exclude_pseudoclasses = kwargs.get('exclude_pseudoclasses', True)
-    keep_style_tags = kwargs.get('keep_style_tags', True)
-    remove_classes = kwargs.get('remove_classes', False)
+    exclude_pseudoclasses = kwargs.pop('exclude_pseudoclasses', True)
+    keep_style_tags = kwargs.pop('keep_style_tags', True)
+    remove_classes = kwargs.pop('remove_classes', False)
     disable_basic_attributes = kwargs.pop('disable_basic_attributes', ['width','height','align'])
     strip_important = kwargs.pop('strip_important', False)
-
     # Remove the html value, it has been passed in seperately as full_html_content
     kwargs.pop('html', False)
 
@@ -48,7 +47,7 @@ def transform_inline_css(full_html_content, **kwargs):
 @app.route("/inliner", methods=['POST'])
 def inline_html():
     inhtml = request.form['inhtml']
-    outhtml = transform_inline_css(inhtml)
+    outhtml = transform_inline_css(inhtml,keep_style_tags=False)
     return render_template("form.html", inhtml=inhtml, outhtml=outhtml)
 
 if __name__ == "__main__":
