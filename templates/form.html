@@ -14,6 +14,7 @@
 	<hr>
 	<h2>Inlined output:</h2>
 	<textarea rows=12 cols=80>{{outhtml}}</textarea><br>
+	<p>Original = {{inhtml|length}} bytes, Inlined = {{outhtml|length}} bytes</p>
 	<iframe srcdoc="{{outhtml}}" style="width:80%; height:350px; margin: 10px auto;"></iframe>
 	{% endif %}
 </form>
